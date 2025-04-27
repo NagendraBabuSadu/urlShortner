@@ -18,22 +18,32 @@ app.use(express.urlencoded({ extended: true }));
 //   })
 // );
 
-const allowedOrigins = [
-  "https://urlshortner-hj53.onrender.com",
-  "http://localhost:3000",
-];
+// const allowedOrigins = [
+//   "https://urlshortner-hj53.onrender.com",
+//   "http://localhost:3000",
+// ];
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: function (origin, callback) {
+//       console.log("Request origin:", origin); // Add logging for debugging
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//   })
+// );
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "*", // Temporarily allow all origins
   })
 );
+
+
 
 app.use("/api", shortUrl);
 
