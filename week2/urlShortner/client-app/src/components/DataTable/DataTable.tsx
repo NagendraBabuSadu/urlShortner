@@ -6,10 +6,11 @@ import axios from "axios";
 
 interface IDataTableProps {
   data: UrlData[];
+  reloadTheUI: () => void;
 }
 
 const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
-  const { data } = props;
+  const { data, reloadTheUI } = props;
   console.log("data fetched is: ", data);
 
   const renderTableData = () => {
@@ -78,24 +79,24 @@ const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   };
 
   const copyToClipBoard = async (url: string) => {
-    try{
-        const copiedUrl = `${serverUrl}/shortUrl/${url}`
-        await navigator.clipboard.writeText(copiedUrl)
-        alert(copiedUrl);
-    } catch(error){
-        console.log(error)
+    try {
+      const copiedUrl = `${serverUrl}/shortUrl/${url}`;
+      await navigator.clipboard.writeText(copiedUrl);
+      alert(copiedUrl);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   const deleteUrl = async (id: string) => {
-    try{
-        await axios.delete(`${serverUrl}/shortUrl/${id}`)
-        alert("Deleted");
-
-    } catch(error) {
-        console.log(error)
+    try {
+      await axios.delete(`${serverUrl}/shortUrl/${id}`);
+      alert("Deleted");
+      reloadTheUI();
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="container mx-auto pt-2 pb-10">
       <div className="relative overflow-x-auto shadow-sm sm:rounded-lg">

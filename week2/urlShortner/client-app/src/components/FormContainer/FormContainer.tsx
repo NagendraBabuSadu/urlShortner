@@ -2,10 +2,14 @@ import * as React from "react";
 import axios from "axios";
 import { serverUrl } from "../../helpers/Constatnts";
 
-interface IFormContainerProps {}
+interface IFormContainerProps {
+  reloadTheUI: () => void;
+}
 
-const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
+const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
+  const { reloadTheUI } = props;
   const [fullUrl, setFullUrl] = React.useState<string>("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -13,6 +17,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
         fullUrl: fullUrl,
       });
       setFullUrl("");
+      reloadTheUI();
     } catch (err) {
       console.log(err);
     }
