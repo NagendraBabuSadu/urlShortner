@@ -10,7 +10,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
   const { reloadTheUI } = props;
   const [fullUrl, setFullUrl] = React.useState<string>("");
 
-  console.log("==> serverUrl,", serverUrl);
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
