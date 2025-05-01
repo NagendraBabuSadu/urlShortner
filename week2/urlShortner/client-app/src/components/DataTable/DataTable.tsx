@@ -11,7 +11,7 @@ interface IDataTableProps {
 
 const DataTable: React.FunctionComponent<IDataTableProps> = (props) => {
   const { data, reloadTheUI } = props;
-  console.log("data fetched is: ", data);
+
 
   const renderTableData = () => {
     return data.map((item) => {
